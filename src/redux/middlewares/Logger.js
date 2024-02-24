@@ -1,7 +1,12 @@
-const logger = store => next => action => {
-    console.log('dispatching', action)
-    let result = next(action)
-    console.log('next state', store.getState())
-    return result
-  }
-  
+const logger = (store) => (next) => (action) => {
+  const currentState = store.getState();
+  console.log("Current State => ", currentState);
+  console.log("Action dispatched => ", action);
+
+  next(action);
+
+  console.log("Updated state =>", store.getState());
+  return next;
+};
+
+export default logger;
